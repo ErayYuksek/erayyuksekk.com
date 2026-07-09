@@ -482,6 +482,125 @@
             margin-bottom: 0;
         }
 
+        /* ---- Research / Makale section ---- */
+        .research-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 3rem 4rem 3rem;
+        }
+
+        .research-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .research-card {
+            background: #222222;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 90px 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .research-card:hover {
+            border-color: #555;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .research-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 12px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .research-icon svg {
+            width: 46px;
+            height: 46px;
+        }
+
+        .research-info h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.6rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .research-info .research-meta {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .research-info p {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 700px;
+        }
+
+        .research-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            align-items: stretch;
+        }
+
+        .research-download-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .research-download-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .research-view-btn {
+            background: transparent;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .research-view-btn:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
         /* Bağlantı durumu bildirimi */
         .notification {
             position: fixed;
@@ -703,35 +822,6 @@
             box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
         }
 
-        .notification {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #222222;
-            border: 1px solid #333;
-            color: #ffffff;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-        }
-
-        .notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            .notification {
-                right: 15px;
-                left: 15px;
-                bottom: 20px;
-            }
-        }
-
         footer {
             background: #1a1a1a;
             text-align: center;
@@ -851,6 +941,28 @@
                 grid-template-columns: 1fr;
             }
 
+            .research-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .research-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .research-icon {
+                margin: 0 auto;
+            }
+
+            .research-info p {
+                max-width: 100%;
+            }
+
+            .research-actions {
+                width: 100%;
+            }
+
             .projects-section {
                 padding: 3rem 1.5rem;
             }
@@ -908,28 +1020,6 @@
                 font-size: 0.9rem;
             }
         }
-
-        /* Toast bildirim */
-        .notification {
-            position: fixed;
-            right: 24px;
-            bottom: 24px;
-            background: #323232;
-            color: #fff;
-            padding: 12px 16px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            opacity: 0;
-            transform: translateY(16px);
-            transition: opacity 0.25s ease, transform 0.25s ease;
-            z-index: 9999;
-            font-size: 0.95rem;
-        }
-
-        .notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
@@ -949,6 +1039,7 @@
                     <li><a href="#about" onclick="closeMenu()">About</a></li>
                     <li><a href="#education" onclick="closeMenu()">Education</a></li>
                     <li><a href="#certificates" onclick="closeMenu()">Certificates</a></li>
+                    <li><a href="#research" onclick="closeMenu()">Research</a></li>
                     <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
                     <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
                 </ul>
@@ -1153,6 +1244,34 @@
         </div>
     </section>
 
+    <section id="research" class="research-section">
+        <h2 class="research-title">🔬 Research</h2>
+        <div class="research-card">
+            <div class="research-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#1a1a1a" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M14 2v6h6" stroke="#1a1a1a" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M8 13h8M8 17h8M8 9h3" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="research-info">
+                <h3>Yapay Zekanın Yazılım Geliştirmede Kod Üretim Hızına Etkisi</h3>
+                <p class="research-meta">Ufuk Üniversitesi · Yönetim Bilişim Sistemleri · 2026</p>
+                <p>Yapay zeka destekli araçların yazılım geliştirme sürecindeki kod üretim hızı, verimlilik ve güvenilirlik üzerindeki etkilerini literatür taraması yöntemiyle inceleyen akademik bir çalışma.</p>
+            </div>
+            <div class="research-actions">
+                <a href="files/yapay-zeka-kod-uretim-makalesi.pdf" download class="research-download-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3v12m0 0 4-4m-4 4-4-4" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    PDF İndir
+                </a>
+                <a href="files/yapay-zeka-kod-uretim-makalesi.pdf" target="_blank" class="research-view-btn">Görüntüle</a>
+            </div>
+        </div>
+    </section>
+
     <section id="projects" class="projects-section">
         <h2 class="section-title">My Projects</h2>
         <div class="projects-grid">
@@ -1243,9 +1362,6 @@
                     <a href="https://github.com/ErayYuksek/ETicaretClient" target="_blank" class="project-button">View on GitHub</a>
                 </div>
             </div>
-        </div>
-    </section>
-      
         </div>
     </section>
 
