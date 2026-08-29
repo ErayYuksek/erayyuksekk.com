@@ -425,6 +425,42 @@
             flex-wrap: wrap;
         }
 
+        .project-card {
+            position: relative;
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            backdrop-filter: blur(4px);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2ecc71;
+            animation: livePulse 1.6s infinite;
+        }
+
+        @keyframes livePulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.6); }
+            70% { box-shadow: 0 0 0 8px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+
         .certificate-button {
             background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
             border: 1px solid rgba(255,255,255,0.6);
@@ -1324,8 +1360,9 @@
         <h2 class="section-title">My Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
+                <span class="live-badge"><span class="live-dot"></span>Canlı</span>
                 <div class="project-image">
-                    <img src="img/mindo.png" alt="Mindo - YKS KPSS ALES">
+                    <img src="img/IMG_4550.JPG" alt="Mindo - YKS KPSS ALES">
                 </div>
                 <div class="project-content">
                     <h3>Mindo</h3>
