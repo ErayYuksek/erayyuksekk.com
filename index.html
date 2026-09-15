@@ -1176,6 +1176,8 @@
             height: 100%;
             background: #f2f2f2;
             overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            touch-action: auto;
         }
 
         .cv-modal-fallback {
@@ -1652,7 +1654,7 @@
 
             // iframe src'yi sadece açılırken set ediyoruz ki sayfa yüklenirken PDF önceden indirilmesin
             if (!iframe.src) {
-                iframe.src = 'files/Eray_Yuksek_CV.pdf#view=Fit&zoom=page-fit';
+                iframe.src = 'files/Eray_Yuksek_CV.pdf#view=FitH';
 
                 // Bazı mobil tarayıcılar (uygulama içi tarayıcılar vb.) PDF'i iframe içinde açamaz.
                 // Kısa bir süre içinde yüklenmezse yedek mesajı göster.
