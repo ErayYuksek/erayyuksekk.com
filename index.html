@@ -1654,14 +1654,24 @@
 
             // iframe src'yi sadece açılırken set ediyoruz ki sayfa yüklenirken PDF önceden indirilmesin
             if (!iframe.src) {
-                iframe.src = 'files/Eray_Yuksek_CV.pdf#view=FitH';
+                // PDF'in tam (absolute) adresini oluştur
+                var pdfAbsoluteUrl = window.location.origin
+                    + window.location.pathname.replace(/[^/]*$/, '')
+                    + 'files/Eray_Yuksek_CV.pdf';
 
-                // Bazı mobil tarayıcılar (uygulama içi tarayıcılar vb.) PDF'i iframe içinde açamaz.
-                // Kısa bir süre içinde yüklenmezse yedek mesajı göster.
+                // Native tarayıcı PDF eklentisi yerine Google Docs Viewer kullanıyoruz.
+                // Native eklenti (özellikle uygulama-içi tarayıcılarda / bazı mobil
+                // tarayıcılarda) sadece ilk sayfayı gösterip diğer sayfalara kaydırmaya
+                // izin vermeyebiliyor. Google Docs Viewer tüm sayfaları tek bir uzun
+                // sayfa halinde render eder ve aşağı kaydırınca diğer sayfalar da görünür.
+                iframe.src = 'https://docs.google.com/gview?embedded=true&url=' + encodeURIComponent(pdfAbsoluteUrl);
+
+                // Bazı tarayıcılar (uygulama içi tarayıcılar vb.) viewer'ı hiç açamazsa
+                // kısa bir süre içinde yüklenmezse yedek mesajı göster.
                 const fallbackTimer = setTimeout(function () {
                     fallback.classList.add('show');
                     iframe.style.display = 'none';
-                }, 4000);
+                }, 6000);
 
                 iframe.addEventListener('load', function () {
                     clearTimeout(fallbackTimer);
