@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -1181,6 +1180,44 @@
             touch-action: auto;
         }
 
+        .cv-modal-pages {
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            height: 100%;
+            background: #525659;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+        }
+
+        .cv-modal-pages canvas {
+            max-width: calc(100% - 20px);
+            height: auto;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            background: #fff;
+        }
+
+        .cv-modal-loading {
+            display: none;
+            flex: 1;
+            min-height: 0;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+
+        .cv-modal-loading.show {
+            display: flex;
+        }
+
         .cv-modal-fallback {
             display: none;
             flex: 1;
@@ -1605,7 +1642,8 @@
                 <span>Eray Yüksek - CV</span>
                 <button type="button" class="cv-modal-close" onclick="closeCvPreview()" aria-label="Kapat">&times;</button>
             </div>
-            <iframe id="cvPreviewIframe" class="cv-modal-iframe" title="CV Önizleme" scrolling="auto"></iframe>
+            <div id="cvModalLoading" class="cv-modal-loading">Yükleniyor...</div>
+            <div id="cvPreviewPages" class="cv-modal-pages" style="display:none;"></div>
             <div id="cvModalFallback" class="cv-modal-fallback">
                 <span>Bu tarayıcıda önizleme açılamadı.</span>
                 <a href="files/Eray_Yuksek_CV.pdf" target="_blank" class="research-view-btn">Yeni sekmede aç</a>
@@ -1644,49 +1682,90 @@
             }
         });
 
-        // CV önizleme modalı
+        // CV önizleme modalı — PDF.js ile her sayfa bir <canvas> olarak çizilir.
+        // Bu yöntem tarayıcının kendi (native) PDF eklentisine veya Google Docs
+        // Viewer gibi dış servislere bağımlı değildir; bu yüzden hem masaüstünde
+        // hem mobilde (uygulama-içi tarayıcılar dahil) aynı şekilde çalışır ve
+        // tüm sayfalar alt alta kaydırılarak görülebilir.
+        var cvPdfjsLoading = null;
+
+        function loadPdfJs() {
+            if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+            if (cvPdfjsLoading) return cvPdfjsLoading;
+
+            cvPdfjsLoading = new Promise(function (resolve, reject) {
+                var script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.js';
+                script.onload = function () {
+                    if (window.pdfjsLib) {
+                        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+                            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.js';
+                        resolve(window.pdfjsLib);
+                    } else {
+                        reject(new Error('pdfjsLib yüklenemedi'));
+                    }
+                };
+                script.onerror = function () { reject(new Error('pdf.js indirilemedi')); };
+                document.head.appendChild(script);
+            });
+
+            return cvPdfjsLoading;
+        }
+
         function openCvPreview() {
             const modal = document.getElementById('cvPreviewModal');
-            const iframe = document.getElementById('cvPreviewIframe');
+            const pagesContainer = document.getElementById('cvPreviewPages');
+            const loading = document.getElementById('cvModalLoading');
             const fallback = document.getElementById('cvModalFallback');
-
-            fallback.classList.remove('show');
-            iframe.style.display = 'block';
-
-            // iframe src'yi sadece açılırken set ediyoruz ki sayfa yüklenirken PDF önceden indirilmesin
-            if (!iframe.src) {
-                // PDF'in tam (absolute) adresini oluştur
-                var pdfAbsoluteUrl = window.location.origin
-                    + window.location.pathname.replace(/[^/]*$/, '')
-                    + 'files/Eray_Yuksek_CV.pdf';
-
-                // Native tarayıcı PDF eklentisi yerine Google Docs Viewer kullanıyoruz.
-                // Native eklenti (özellikle uygulama-içi tarayıcılarda / bazı mobil
-                // tarayıcılarda) sadece ilk sayfayı gösterip diğer sayfalara kaydırmaya
-                // izin vermeyebiliyor. Google Docs Viewer tüm sayfaları tek bir uzun
-                // sayfa halinde render eder ve aşağı kaydırınca diğer sayfalar da görünür.
-                iframe.src = 'https://docs.google.com/gview?embedded=true&url=' + encodeURIComponent(pdfAbsoluteUrl);
-
-                // Bazı tarayıcılar (uygulama içi tarayıcılar vb.) viewer'ı hiç açamazsa
-                // kısa bir süre içinde yüklenmezse yedek mesajı göster.
-                const fallbackTimer = setTimeout(function () {
-                    fallback.classList.add('show');
-                    iframe.style.display = 'none';
-                }, 6000);
-
-                iframe.addEventListener('load', function () {
-                    clearTimeout(fallbackTimer);
-                }, { once: true });
-
-                iframe.addEventListener('error', function () {
-                    clearTimeout(fallbackTimer);
-                    fallback.classList.add('show');
-                    iframe.style.display = 'none';
-                }, { once: true });
-            }
 
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+
+            // Zaten render edilmişse tekrar yüklemeye gerek yok
+            if (pagesContainer.dataset.rendered === '1') {
+                return;
+            }
+
+            fallback.classList.remove('show');
+            pagesContainer.style.display = 'none';
+            loading.classList.add('show');
+
+            var pdfUrl = window.location.origin
+                + window.location.pathname.replace(/[^/]*$/, '')
+                + 'files/Eray_Yuksek_CV.pdf';
+
+            loadPdfJs()
+                .then(function (pdfjsLib) {
+                    return pdfjsLib.getDocument(pdfUrl).promise;
+                })
+                .then(function (pdf) {
+                    var renderNext = function (pageNum) {
+                        if (pageNum > pdf.numPages) return Promise.resolve();
+                        return pdf.getPage(pageNum).then(function (page) {
+                            var scale = Math.min(2, (window.devicePixelRatio || 1) * 1.3);
+                            var viewport = page.getViewport({ scale: scale });
+                            var canvas = document.createElement('canvas');
+                            canvas.width = viewport.width;
+                            canvas.height = viewport.height;
+                            var ctx = canvas.getContext('2d');
+                            pagesContainer.appendChild(canvas);
+                            return page.render({ canvasContext: ctx, viewport: viewport }).promise
+                                .then(function () { return renderNext(pageNum + 1); });
+                        });
+                    };
+                    return renderNext(1);
+                })
+                .then(function () {
+                    loading.classList.remove('show');
+                    pagesContainer.style.display = 'flex';
+                    pagesContainer.dataset.rendered = '1';
+                })
+                .catch(function (err) {
+                    console.error('CV önizleme hatası:', err);
+                    loading.classList.remove('show');
+                    pagesContainer.style.display = 'none';
+                    fallback.classList.add('show');
+                });
         }
 
         function closeCvPreview(event) {
