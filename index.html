@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -380,8 +380,22 @@
             object-fit: cover;
         }
 
+        .project-image.project-image--icon {
+            background: #ffffff;
+            padding: 2.5rem;
+        }
+
+        .project-image.project-image--icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
         .project-content {
             padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .project-card h3 {
@@ -396,6 +410,22 @@
             margin-bottom: 1.5rem;
             line-height: 1.6;
             font-size: 0.95rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags .tech-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #aaa;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .project-button {
@@ -423,6 +453,7 @@
             display: flex;
             gap: 0.8rem;
             flex-wrap: wrap;
+            margin-top: auto;
         }
 
         .project-card {
@@ -459,6 +490,17 @@
             0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.6); }
             70% { box-shadow: 0 0 0 8px rgba(231, 76, 60, 0); }
             100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        .live-badge.badge-soon .live-dot {
+            background: #f5a623;
+            animation: soonPulse 1.6s infinite;
+        }
+
+        @keyframes soonPulse {
+            0% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.6); }
+            70% { box-shadow: 0 0 0 8px rgba(245, 166, 35, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0); }
         }
 
         .certificate-button {
@@ -716,6 +758,46 @@
         nav {
             display: flex;
             align-items: center;
+            gap: 1.25rem;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .lang-btn.active {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .lang-btn.active:hover {
+            background: #e0e0e0;
+        }
+
+        @media (max-width: 480px) {
+            .lang-btn {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.75rem;
+            }
         }
 
         .logo {
@@ -1283,19 +1365,23 @@
                 <img src="img/logom.png" alt="Logo" class="logo">
             </a>
             <nav>
+                <div class="lang-switch" role="group" aria-label="Language selector">
+                    <button type="button" class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+                    <button type="button" class="lang-btn" data-lang="tr" onclick="setLanguage('tr')">TR</button>
+                </div>
                 <div class="menu-toggle" onclick="toggleMenu()">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="#home" onclick="closeMenu()">Home</a></li>
-                    <li><a href="#about" onclick="closeMenu()">About</a></li>
-                    <li><a href="#education" onclick="closeMenu()">Education</a></li>
-                    <li><a href="#certificates" onclick="closeMenu()">Certificates</a></li>
-                    <li><a href="#research" onclick="closeMenu()">Research</a></li>
-                    <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
-                    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+                    <li><a href="#home" onclick="closeMenu()" data-en="Home" data-tr="Ana Sayfa">Home</a></li>
+                    <li><a href="#about" onclick="closeMenu()" data-en="About" data-tr="Hakkımda">About</a></li>
+                    <li><a href="#education" onclick="closeMenu()" data-en="Education" data-tr="Eğitim">Education</a></li>
+                    <li><a href="#certificates" onclick="closeMenu()" data-en="Certificates" data-tr="Sertifikalar">Certificates</a></li>
+                    <li><a href="#research" onclick="closeMenu()" data-en="Research" data-tr="Araştırma">Research</a></li>
+                    <li><a href="#projects" onclick="closeMenu()" data-en="Projects" data-tr="Projeler">Projects</a></li>
+                    <li><a href="#contact" onclick="closeMenu()" data-en="Contact" data-tr="İletişim">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -1304,7 +1390,7 @@
         <img src="img/me.png" alt="Eray Yüksek" class="profile-image">
         <div class="hero-content">
             <h1>Eray Yüksek</h1>
-            <div class="hero-subtitle">Backend Developer</div>
+            <div class="hero-subtitle" data-en="Backend Developer" data-tr="Backend Geliştirici">Backend Developer</div>
             
             <div class="skills">
                 <span class="skill-tag">
@@ -1375,10 +1461,10 @@
     </section>
 
     <section id="about" class="about">
-        <p class="about-text">
+        <p class="about-text" data-en="Hello, I'm Eray. I graduated from the Department of Advanced Computer Programming and Management Information Systems. I have a strong passion for the world of software development, and I'm constantly focused on improving my skills, learning new technologies, and creating impactful solutions. I'm particularly interested in modern development processes, user-focused solutions, and efficient system design." data-tr="Merhaba, ben Eray. İleri Bilgisayar Programcılığı ve Yönetim Bilişim Sistemleri bölümlerinden mezun oldum. Yazılım geliştirme dünyasına büyük bir tutkuyla bağlıyım ve sürekli olarak becerilerimi geliştirmeye, yeni teknolojiler öğrenmeye ve etkili çözümler üretmeye odaklanıyorum. Özellikle modern geliştirme süreçleri, kullanıcı odaklı çözümler ve verimli sistem tasarımıyla ilgileniyorum.">
             Hello, I'm Eray. I graduated from the Department of Advanced Computer Programming and Management Information Systems. I have a strong passion for the world of software development, and I'm constantly focused on improving my skills, learning new technologies, and creating impactful solutions. I'm particularly interested in modern development processes, user-focused solutions, and efficient system design.
         </p>
-        <p class="about-text">
+        <p class="about-text" data-en="My goal is to make a difference in the tech industry by developing innovative, user-centric, and sustainable software projects. Thanks to my problem-solving abilities, analytical thinking skills, and eagerness to learn, I can quickly adapt to dynamic environments. As a collaborative and proactive developer, I aim to contribute to both individual and team-oriented projects." data-tr="Amacım, yenilikçi, kullanıcı odaklı ve sürdürülebilir yazılım projeleri geliştirerek teknoloji sektöründe fark yaratmak. Problem çözme yeteneğim, analitik düşünme becerim ve öğrenmeye olan isteğim sayesinde dinamik ortamlara hızla uyum sağlayabiliyorum. İşbirlikçi ve proaktif bir geliştirici olarak hem bireysel hem de ekip odaklı projelere katkı sağlamayı hedefliyorum.">
             My goal is to make a difference in the tech industry by developing innovative, user-centric, and sustainable software projects. Thanks to my problem-solving abilities, analytical thinking skills, and eagerness to learn, I can quickly adapt to dynamic environments. As a collaborative and proactive developer, I aim to contribute to both individual and team-oriented projects.
         </p>
         
@@ -1391,7 +1477,7 @@
     </section>
 
     <section id="education" class="education-section">
-        <h2 class="education-title">🎓 Education</h2>
+        <h2 class="education-title">🎓 <span data-en="Education" data-tr="Eğitim">Education</span></h2>
         <div class="education-grid">
             <div class="education-card">
                 <div class="education-logo">
@@ -1399,7 +1485,7 @@
                 </div>
                 <div class="education-info">
                     <h3>Ufuk University</h3>
-                    <p>Computer Programming</p>
+                    <p data-en="Computer Programming" data-tr="Bilgisayar Programcılığı">Computer Programming</p>
                 </div>
             </div>
 
@@ -1409,14 +1495,14 @@
                 </div>
                 <div class="education-info">
                     <h3>Ufuk University</h3>
-                    <p>Management Information Systems</p>
+                    <p data-en="Management Information Systems" data-tr="Yönetim Bilişim Sistemleri">Management Information Systems</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="certificates" class="certificates-section">
-        <h2 class="certificates-title">📜 Certificates</h2>
+        <h2 class="certificates-title">📜 <span data-en="Certificates" data-tr="Sertifikalar">Certificates</span></h2>
         <div class="certificates-grid">
             <div class="certificate-card">
                 <div class="certificate-header">
@@ -1494,12 +1580,12 @@
         </div>
         <br>
         <div class="certificates-actions">
-            <a href="https://www.linkedin.com/in/eray-y-6a671a322/details/certifications/" target="_blank" class="certificate-button">View Certificates</a>
+            <a href="https://www.linkedin.com/in/eray-y-6a671a322/details/certifications/" target="_blank" class="certificate-button" data-en="View Certificates" data-tr="Sertifikaları Görüntüle">View Certificates</a>
         </div>
     </section>
 
     <section id="research" class="research-section">
-        <h2 class="research-title">🔬 Research</h2>
+        <h2 class="research-title">🔬 <span data-en="Research" data-tr="Araştırma">Research</span></h2>
         <div class="research-card">
             <div class="research-icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1509,9 +1595,9 @@
                 </svg>
             </div>
             <div class="research-info">
-                <h3>Yapay Zekanın Yazılım Geliştirmede Kod Üretim Hızına Etkisi</h3>
-                <p class="research-meta">Ufuk Üniversitesi · Yönetim Bilişim Sistemleri · 2026</p>
-                <p>Yapay zeka destekli araçların yazılım geliştirme sürecindeki kod üretim hızı, verimlilik ve güvenilirlik üzerindeki etkilerini literatür taraması yöntemiyle inceleyen akademik bir çalışma.</p>
+                <h3 data-en="The Impact of AI on Code Generation Speed in Software Development" data-tr="Yapay Zekanın Yazılım Geliştirmede Kod Üretim Hızına Etkisi">The Impact of AI on Code Generation Speed in Software Development</h3>
+                <p class="research-meta" data-en="Ufuk University · Management Information Systems · 2026" data-tr="Ufuk Üniversitesi · Yönetim Bilişim Sistemleri · 2026">Ufuk University · Management Information Systems · 2026</p>
+                <p data-en="An academic study examining the effects of AI-powered tools on code generation speed, efficiency and reliability in the software development process, using a literature review methodology." data-tr="Yapay zeka destekli araçların yazılım geliştirme sürecindeki kod üretim hızı, verimlilik ve güvenilirlik üzerindeki etkilerini literatür taraması yöntemiyle inceleyen akademik bir çalışma.">An academic study examining the effects of AI-powered tools on code generation speed, efficiency and reliability in the software development process, using a literature review methodology.</p>
             </div>
             <div class="research-actions">
                 <a href="files/yapay-zeka-kod-uretim-makalesi.pdf" download class="research-download-btn">
@@ -1519,42 +1605,80 @@
                         <path d="M12 3v12m0 0 4-4m-4 4-4-4" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    PDF İndir
+                    <span data-en="Download PDF" data-tr="PDF İndir">Download PDF</span>
                 </a>
-                <a href="files/yapay-zeka-kod-uretim-makalesi.pdf" target="_blank" class="research-view-btn">Görüntüle</a>
+                <a href="files/yapay-zeka-kod-uretim-makalesi.pdf" target="_blank" class="research-view-btn" data-en="View" data-tr="Görüntüle">View</a>
             </div>
         </div>
     </section>
 
     <section id="projects" class="projects-section">
-        <h2 class="section-title">My Projects</h2>
+        <h2 class="section-title" data-en="My Projects" data-tr="Projelerim">My Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <span class="live-badge"><span class="live-dot"></span>Live</span>
+                <span class="live-badge"><span class="live-dot"></span><span data-en="Live" data-tr="Canlı">Live</span></span>
                 <div class="project-image">
                     <img src="img/IMG_4550.JPG" alt="Mindo - YKS KPSS ALES">
                 </div>
                 <div class="project-content">
                     <h3>Mindo</h3>
-                    <p>A mobile exam-prep platform for YKS, KPSS, ALES and DGS students. Features include question sharing, collaborative study with other students, daily study plan creation, and progress tracking across subjects. Helps students build a consistent study routine and monitor their improvement over time.</p>
+                    <p data-en="A social exam-prep platform that helps students manage every stage of their study journey in one place. Built with .NET 8, PostgreSQL, JWT and SignalR for real-time features, with Azure AI Content Safety keeping shared content secure and appropriate for all users." data-tr="Öğrencilerin sınav hazırlık sürecinin her aşamasını tek platformda yönetmesini sağlayan sosyal öğrenme uygulaması. .NET 8, PostgreSQL, JWT ve gerçek zamanlı özellikler için SignalR ile geliştirildi; Azure AI Content Safety ile paylaşılan içerikler güvenli ve uygun tutulur.">A social exam-prep platform that helps students manage every stage of their study journey in one place. Built with .NET 8, PostgreSQL, JWT and SignalR for real-time features, with Azure AI Content Safety keeping shared content secure and appropriate for all users.</p>
+                    <div class="project-tags">
+                        <span class="tech-tag">.NET 8</span>
+                        <span class="tech-tag">ASP.NET Core</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">SignalR</span>
+                        <span class="tech-tag">JWT</span>
+                        <span class="tech-tag">Azure AI Content Safety</span>
+                    </div>
                     <div class="project-actions">
-                        <a href="https://apps.apple.com/app/id6766045557" target="_blank" class="project-button">Download on the App Store</a>
-                        <a href="https://getmindo.com" target="_blank" class="project-button">Website</a>
+                        <a href="https://apps.apple.com/app/id6766045557" target="_blank" class="project-button" data-en="Download on the App Store" data-tr="App Store'dan İndir">Download on the App Store</a>
+                        <a href="https://getmindo.com" target="_blank" class="project-button" data-en="Website" data-tr="Web Sitesi">Website</a>
                     </div>
                 </div>
             </div>
 
             <div class="project-card">
-                <span class="live-badge"><span class="live-dot"></span>Live</span>
+                <span class="live-badge"><span class="live-dot"></span><span data-en="Live" data-tr="Canlı">Live</span></span>
                 <div class="project-image">
                     <img src="img/SecureSign.png" alt="SecureSign">
                 </div>
                 <div class="project-content">
                     <h3>SecureSign</h3>
-                    <p>A full-stack document security platform simulating document signing, verification, and approval workflows. It includes electronic signatures (SHA-256 + RSA), a mobile signature verification flow, timestamping, a digital approval/rejection process, audit logs, and a role-based admin panel. Built with .NET 8, CQRS + MediatR, and PostgreSQL on the backend, and React with Vite on the frontend.</p>
+                    <p data-en="A full-stack demo application that models digital document approval and signing workflows end to end. Built with .NET 8, PostgreSQL, CQRS and MediatR on a layered backend, with JWT authentication and role-based access control for secure, structured operations." data-tr="Dijital belge onay ve imzalama süreçlerini uçtan uca modelleyen full-stack bir demo uygulaması. .NET 8, PostgreSQL, CQRS ve MediatR ile katmanlı bir backend üzerine, JWT kimlik doğrulama ve rol tabanlı yetkilendirme ile güvenli ve düzenli işlemler sağlandı.">A full-stack demo application that models digital document approval and signing workflows end to end. Built with .NET 8, PostgreSQL, CQRS and MediatR on a layered backend, with JWT authentication and role-based access control for secure, structured operations.</p>
+                    <div class="project-tags">
+                        <span class="tech-tag">.NET 8</span>
+                        <span class="tech-tag">ASP.NET Core</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">CQRS</span>
+                        <span class="tech-tag">MediatR</span>
+                        <span class="tech-tag">JWT</span>
+                    </div>
                     <div class="project-actions">
-                        <a href="https://github.com/ErayYuksek/SecureSign" target="_blank" class="project-button">View on GitHub</a>
-                        <a href="https://securesign-web.onrender.com" target="_blank" class="project-button">Website</a>
+                        <a href="https://github.com/ErayYuksek/SecureSign" target="_blank" class="project-button" data-en="View on GitHub" data-tr="GitHub'da Görüntüle">View on GitHub</a>
+                        <a href="https://securesign-web.onrender.com" target="_blank" class="project-button" data-en="Website" data-tr="Web Sitesi">Website</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <span class="live-badge badge-soon"><span class="live-dot"></span><span data-en="Coming Soon" data-tr="Yakında">Coming Soon</span></span>
+                <div class="project-image project-image--icon">
+                    <img src="img/icon.png" alt="Trend AI">
+                </div>
+                <div class="project-content">
+                    <h3>Trend AI</h3>
+                    <p data-en="An AI-powered digital wardrobe and personal styling application. Built with .NET 8, PostgreSQL and JWT authentication, it lets users catalog their wardrobe and receive personalized outfit and product recommendations powered by AI, tailored to their own clothing items." data-tr="Yapay zeka destekli dijital gardırop ve kişisel stil uygulaması. .NET 8, PostgreSQL ve JWT kimlik doğrulama ile geliştirildi; kullanıcılar gardıroplarını kaydedebilir ve kendi kıyafetlerine özel, yapay zeka destekli kombin ve ürün önerileri alabilir.">An AI-powered digital wardrobe and personal styling application. Built with .NET 8, PostgreSQL and JWT authentication, it lets users catalog their wardrobe and receive personalized outfit and product recommendations powered by AI, tailored to their own clothing items.</p>
+                    <div class="project-tags">
+                        <span class="tech-tag">.NET 8</span>
+                        <span class="tech-tag">ASP.NET Core</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">JWT</span>
+                        <span class="tech-tag">AI Integration</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://github.com/ErayYuksek" target="_blank" class="project-button" data-en="View on GitHub" data-tr="GitHub'da Görüntüle">View on GitHub</a>
+                        <a href="https://trend-ai-tanitim.vercel.app" target="_blank" class="project-button" data-en="Preview" data-tr="Tanıtımı Gör">Preview</a>
                     </div>
                 </div>
             </div>
@@ -1565,8 +1689,8 @@
                 </div>
                 <div class="project-content">
                     <h3>CarBook Project</h3>
-                    <p>A comprehensive car booking system using ASP.Net Core 8.0. Implements Onion Architecture with 6 layers, CQRS pattern with MediatR, and secure JWT authentication. Features include real-time updates with SignalR, data validation, and advanced reporting with SQL Pivot Tables.</p>
-                    <a href="https://github.com/ErayYuksek/CarBookProje" target="_blank" class="project-button">View on GitHub</a>
+                    <p data-en="A comprehensive car booking system using ASP.Net Core 8.0. Implements Onion Architecture with 6 layers, CQRS pattern with MediatR, and secure JWT authentication. Features include real-time updates with SignalR, data validation, and advanced reporting with SQL Pivot Tables." data-tr="ASP.Net Core 8.0 kullanılarak geliştirilmiş kapsamlı bir araç rezervasyon sistemi. 6 katmanlı Onion Mimarisi, MediatR ile CQRS deseni ve güvenli JWT kimlik doğrulama uygulanmıştır. SignalR ile gerçek zamanlı güncellemeler, veri doğrulama ve SQL Pivot Tabloları ile gelişmiş raporlama özellikleri bulunur.">A comprehensive car booking system using ASP.Net Core 8.0. Implements Onion Architecture with 6 layers, CQRS pattern with MediatR, and secure JWT authentication. Features include real-time updates with SignalR, data validation, and advanced reporting with SQL Pivot Tables.</p>
+                    <a href="https://github.com/ErayYuksek/CarBookProje" target="_blank" class="project-button" data-en="View on GitHub" data-tr="GitHub'da Görüntüle">View on GitHub</a>
                 </div>
             </div>
 
@@ -1576,8 +1700,8 @@
                 </div>
                 <div class="project-content">
                     <h3>Blog Project</h3>
-                    <p>A dynamic blog platform built with ASP.Net Core 5.0. Features include user authentication, multi-role system (user, author, admin), comment management, and category organization. Built with Entity Framework Core, SQL Server, and Bootstrap.</p>
-                    <a href="https://github.com/ErayYuksek/BlogProject" target="_blank" class="project-button">View on GitHub</a>
+                    <p data-en="A dynamic blog platform built with ASP.Net Core 5.0. Features include user authentication, multi-role system (user, author, admin), comment management, and category organization. Built with Entity Framework Core, SQL Server, and Bootstrap." data-tr="ASP.Net Core 5.0 ile geliştirilmiş dinamik bir blog platformu. Kullanıcı kimlik doğrulama, çok rollü sistem (kullanıcı, yazar, yönetici), yorum yönetimi ve kategori düzenleme özellikleri içerir. Entity Framework Core, SQL Server ve Bootstrap ile oluşturulmuştur.">A dynamic blog platform built with ASP.Net Core 5.0. Features include user authentication, multi-role system (user, author, admin), comment management, and category organization. Built with Entity Framework Core, SQL Server, and Bootstrap.</p>
+                    <a href="https://github.com/ErayYuksek/BlogProject" target="_blank" class="project-button" data-en="View on GitHub" data-tr="GitHub'da Görüntüle">View on GitHub</a>
                 </div>
             </div>
 
@@ -1587,45 +1711,34 @@
                 </div>
                 <div class="project-content">
                     <h3>ETicaretAPI</h3>
-                    <p>A robust e-commerce backend API built with ASP.NET Core. Features include product management, shopping cart functionality, payment integration, and order processing. Secured with JWT authentication and includes comprehensive validation.</p>
-                    <a href="https://github.com/ErayYuksek/ETicaretAPI" target="_blank" class="project-button">View on GitHub</a>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="img/client.png" alt="ETicaretClient">
-                </div>
-                <div class="project-content">
-                    <h3>ETicaretClient</h3>
-                    <p>A desktop client application for e-commerce management. Features include product browsing, shopping cart functionality, user authentication, and order history. Built with modern UI/UX principles.</p>
-                    <a href="https://github.com/ErayYuksek/ETicaretClient" target="_blank" class="project-button">View on GitHub</a>
+                    <p data-en="A robust e-commerce backend API built with ASP.NET Core. Features include product management, shopping cart functionality, payment integration, and order processing. Secured with JWT authentication and includes comprehensive validation." data-tr="ASP.NET Core ile geliştirilmiş sağlam bir e-ticaret backend API'si. Ürün yönetimi, sepet işlevselliği, ödeme entegrasyonu ve sipariş işleme özellikleri içerir. JWT kimlik doğrulama ile güvence altına alınmış olup kapsamlı doğrulama içerir.">A robust e-commerce backend API built with ASP.NET Core. Features include product management, shopping cart functionality, payment integration, and order processing. Secured with JWT authentication and includes comprehensive validation.</p>
+                    <a href="https://github.com/ErayYuksek/ETicaretAPI" target="_blank" class="project-button" data-en="View on GitHub" data-tr="GitHub'da Görüntüle">View on GitHub</a>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="contact-section">
-        <h2 class="contact-title">Contact</h2>
-        <p class="contact-text">Let's connect and collaborate on innovative projects.</p>
+        <h2 class="contact-title" data-en="Contact" data-tr="İletişim">Contact</h2>
+        <p class="contact-text" data-en="Let's connect and collaborate on innovative projects." data-tr="Yenilikçi projelerde bağlantı kuralım ve iş birliği yapalım.">Let's connect and collaborate on innovative projects.</p>
         <form class="contact-form" method="POST" action="https://formspree.io/f/mzzkeaqz">
             <div class="form-group">
-                <input type="text" name="name" placeholder="Name" required>
+                <input type="text" name="name" placeholder="Name" data-en-placeholder="Name" data-tr-placeholder="İsim" required>
             </div>
             <div class="form-group">
-                <input type="email" name="email" placeholder="Email" required>
+                <input type="email" name="email" placeholder="Email" data-en-placeholder="Email" data-tr-placeholder="E-posta" required>
             </div>
             <div class="form-group">
-                <textarea name="message" placeholder="Message" required></textarea>
+                <textarea name="message" placeholder="Message" data-en-placeholder="Message" data-tr-placeholder="Mesaj" required></textarea>
             </div>
             <input type="hidden" name="_subject" value="Yeni İletişim Mesajı">
             <input type="hidden" name="_captcha" value="false">
-            <button type="submit" class="submit-btn">Mesajı Gönder</button>
+            <button type="submit" class="submit-btn" data-en="Send Message" data-tr="Mesajı Gönder">Send Message</button>
         </form>
     </section>
 
     <footer>
-        <p>&copy; 2025 Eray Yüksek. All rights reserved.</p>
+        <p>&copy; 2025 Eray Yüksek. <span data-en="All rights reserved." data-tr="Tüm hakları saklıdır.">All rights reserved.</span></p>
     </footer>
 
     <button type="button" class="cv-float-btn" onclick="openCvPreview()">
@@ -1633,7 +1746,7 @@
             <path d="M12 5c-5 0-8.5 4.5-9.5 7 1 2.5 4.5 7 9.5 7s8.5-4.5 9.5-7c-1-2.5-4.5-7-9.5-7z" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             <circle cx="12" cy="12" r="3" stroke="#000" stroke-width="1.8"/>
         </svg>
-        CV Görüntüle
+        <span data-en="View CV" data-tr="CV Görüntüle">View CV</span>
     </button>
 
     <div id="cvPreviewModal" class="cv-modal-overlay" onclick="closeCvPreview(event)">
@@ -1642,11 +1755,11 @@
                 <span>Eray Yüksek - CV</span>
                 <button type="button" class="cv-modal-close" onclick="closeCvPreview()" aria-label="Kapat">&times;</button>
             </div>
-            <div id="cvModalLoading" class="cv-modal-loading">Yükleniyor...</div>
+            <div id="cvModalLoading" class="cv-modal-loading" data-en="Loading..." data-tr="Yükleniyor...">Loading...</div>
             <div id="cvPreviewPages" class="cv-modal-pages" style="display:none;"></div>
             <div id="cvModalFallback" class="cv-modal-fallback">
-                <span>Bu tarayıcıda önizleme açılamadı.</span>
-                <a href="files/Eray_Yuksek_CV.pdf" target="_blank" class="research-view-btn">Yeni sekmede aç</a>
+                <span data-en="Preview couldn't be opened in this browser." data-tr="Bu tarayıcıda önizleme açılamadı.">Preview couldn't be opened in this browser.</span>
+                <a href="files/Eray_Yuksek_CV.pdf" target="_blank" class="research-view-btn" data-en="Open in new tab" data-tr="Yeni sekmede aç">Open in new tab</a>
             </div>
             <div class="cv-modal-footer">
                 <a href="files/Eray_Yuksek_CV.pdf" download class="research-download-btn">
@@ -1654,7 +1767,7 @@
                         <path d="M12 3v12m0 0 4-4m-4 4-4-4" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    CV İndir
+                    <span data-en="Download CV" data-tr="CV İndir">Download CV</span>
                 </a>
             </div>
         </div>
@@ -1670,6 +1783,54 @@
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.remove('show');
         }
+
+        // ---- Dil değiştirici / Language switcher ----
+        window.currentLang = 'en';
+
+        var jsStrings = {
+            sending: { en: 'Sending...', tr: 'Gönderiliyor...' },
+            sendMessage: { en: 'Send Message', tr: 'Mesajı Gönder' },
+            sentSuccess: { en: 'Your message has been sent. Thank you!', tr: 'Mesajınız gönderildi. Teşekkürler!' },
+            unexpectedResponse: { en: 'Unexpected response. Please try again.', tr: 'Beklenmeyen yanıt. Lütfen tekrar deneyin.' },
+            networkTimeout: { en: 'Network timeout. Please check your connection and try again.', tr: 'Ağ zaman aşımı. Lütfen internetinizi kontrol edip tekrar deneyin.' },
+            submitFailed: { en: 'Submission failed. Please try again.', tr: 'Gönderim başarısız. Lütfen tekrar deneyin.' },
+            offline: { en: "You're offline. Some content may be unavailable.", tr: 'Çevrimdışısınız. Bazı içerikler kullanılamayabilir.' },
+            backOnline: { en: 'Back online', tr: 'Tekrar çevrimiçi' }
+        };
+
+        function t(key) {
+            var entry = jsStrings[key];
+            if (!entry) return '';
+            return entry[window.currentLang] || entry.en;
+        }
+
+        function setLanguage(lang) {
+            if (lang !== 'en' && lang !== 'tr') lang = 'en';
+            window.currentLang = lang;
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('[data-en]').forEach(function (el) {
+                var text = el.getAttribute('data-' + lang);
+                if (text !== null) el.textContent = text;
+            });
+
+            document.querySelectorAll('[data-en-placeholder]').forEach(function (el) {
+                var text = el.getAttribute('data-' + lang + '-placeholder');
+                if (text !== null) el.setAttribute('placeholder', text);
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(function (btn) {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+
+            try { localStorage.setItem('site-lang', lang); } catch (e) {}
+        }
+
+        (function initLanguage() {
+            var saved = 'en';
+            try { saved = localStorage.getItem('site-lang') || 'en'; } catch (e) {}
+            setLanguage(saved);
+        })();
 
         // Close menu when clicking outside
         document.addEventListener('click', function(event) {
@@ -1794,7 +1955,7 @@
             // Disable submit button to prevent double submission
             const submitBtn = form.querySelector('.submit-btn');
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Gönderiliyor...';
+            submitBtn.textContent = t('sending');
             
             // Send email using FormSubmit with timeout
             const controller = new AbortController();
@@ -1820,16 +1981,16 @@
             })
             .then(data => {
                 if (data.ok === true) {
-                    showNotification('Mesajınız gönderildi. Teşekkürler!');
+                    showNotification(t('sentSuccess'));
                 } else {
-                    showNotification('Beklenmeyen yanıt. Lütfen tekrar deneyin.');
+                    showNotification(t('unexpectedResponse'));
                 }
                 form.reset();
             })
             .catch(error => {
                 const msg = error.name === 'AbortError'
-                    ? 'Ağ zaman aşımı. Lütfen internetinizi kontrol edip tekrar deneyin.'
-                    : 'Gönderim başarısız. Lütfen tekrar deneyin.';
+                    ? t('networkTimeout')
+                    : t('submitFailed');
                 showNotification(msg);
                 console.error('Error:', error);
                 // Ağ zaman aşımında normal form POST'una geri dön
@@ -1839,7 +2000,7 @@
             })
             .finally(() => {
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Mesajı Gönder';
+                submitBtn.textContent = t('sendMessage');
             });
         });
 
@@ -1870,7 +2031,7 @@
             }, 3000);
         }
     </script>
-    <div id="offlineToast" class="notification" role="status" aria-live="polite" style="display:none;">You're offline. Some content may be unavailable.</div>
+    <div id="offlineToast" class="notification" role="status" aria-live="polite" style="display:none;" data-en="You're offline. Some content may be unavailable." data-tr="Çevrimdışısınız. Bazı içerikler kullanılamayabilir.">You're offline. Some content may be unavailable.</div>
 
     <script>
         (function () {
@@ -1898,15 +2059,15 @@
             }
 
             window.addEventListener('offline', function () {
-                show("You're offline. Some content may be unavailable.", true);
+                show(t('offline'), true);
             });
 
             window.addEventListener('online', function () {
-                show('Back online', false);
+                show(t('backOnline'), false);
             });
 
             if (!navigator.onLine) {
-                show("You're offline. Some content may be unavailable.", true);
+                show(t('offline'), true);
             }
         })();
     </script>
