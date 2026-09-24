@@ -1171,7 +1171,7 @@
             }
         }
 
-        /* ---- CV İndir - sağ alt sabit buton ---- */
+        /* ---- CV Görüntüle - sağ alt sabit buton (yeni sekmede açılır) ---- */
         .cv-float-btn {
             position: fixed;
             right: 24px;
@@ -1212,174 +1212,6 @@
                 bottom: 14px;
                 padding: 0.75rem 1.2rem;
                 font-size: 0.9rem;
-            }
-        }
-
-        /* ---- CV Önizleme Modalı ---- */
-        .cv-modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.75);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .cv-modal-overlay.show {
-            display: flex;
-        }
-
-        .cv-modal-content {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 1200px;
-            height: 94vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-        }
-
-        .cv-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid #333;
-            color: #ffffff;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-
-        .cv-modal-close {
-            background: none;
-            border: none;
-            color: #ffffff;
-            font-size: 1.8rem;
-            line-height: 1;
-            cursor: pointer;
-            padding: 0;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.2s;
-        }
-
-        .cv-modal-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .cv-modal-iframe {
-            flex: 1;
-            min-height: 0;
-            border: none;
-            width: 100%;
-            height: 100%;
-            background: #f2f2f2;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
-            touch-action: auto;
-        }
-
-        .cv-modal-pages {
-            flex: 1;
-            min-height: 0;
-            width: 100%;
-            height: 100%;
-            background: #525659;
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
-            touch-action: pan-y;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 0;
-        }
-
-        .cv-modal-pages canvas {
-            max-width: calc(100% - 20px);
-            height: auto;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-            background: #fff;
-        }
-
-        .cv-modal-loading {
-            display: none;
-            flex: 1;
-            min-height: 0;
-            align-items: center;
-            justify-content: center;
-            color: #aaa;
-            font-size: 0.95rem;
-        }
-
-        .cv-modal-loading.show {
-            display: flex;
-        }
-
-        .cv-modal-fallback {
-            display: none;
-            flex: 1;
-            min-height: 0;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #aaa;
-            padding: 2rem;
-            font-size: 0.95rem;
-            gap: 0.75rem;
-            flex-direction: column;
-        }
-
-        .cv-modal-fallback.show {
-            display: flex;
-        }
-
-        .cv-modal-footer {
-            padding: 1rem 1.5rem;
-            border-top: 1px solid #333;
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.8rem;
-            flex-shrink: 0;
-        }
-
-        @media (max-width: 600px) {
-            .cv-modal-overlay {
-                padding: 0;
-            }
-
-            .cv-modal-content {
-                height: 100vh;
-                height: 100dvh;
-                max-width: 100%;
-                border-radius: 0;
-                border-left: none;
-                border-right: none;
-            }
-
-            .cv-modal-header {
-                padding: 0.9rem 1rem;
-                padding-top: max(0.9rem, env(safe-area-inset-top));
-            }
-
-            .cv-modal-footer {
-                padding: 0.9rem 1rem;
-                padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
-            }
-
-            .cv-modal-footer .research-download-btn {
-                flex: 1;
-                justify-content: center;
             }
         }
     </style>
@@ -1487,8 +1319,8 @@
     </section>
 
     <section id="about" class="about">
-        <p class="about-text" data-en="Hello, I'm Eray. I graduated from the Department of Advanced Computer Programming and Management Information Systems. I have a strong passion for the world of software development, and I'm constantly focused on improving my skills, learning new technologies, and creating impactful solutions. I'm particularly interested in modern development processes, user-focused solutions, and efficient system design." data-tr="Merhaba, ben Eray. İleri Bilgisayar Programcılığı ve Yönetim Bilişim Sistemleri bölümlerinden mezun oldum. Yazılım geliştirme dünyasına büyük bir tutkuyla bağlıyım ve sürekli olarak becerilerimi geliştirmeye, yeni teknolojiler öğrenmeye ve etkili çözümler üretmeye odaklanıyorum. Özellikle modern geliştirme süreçleri, kullanıcı odaklı çözümler ve verimli sistem tasarımıyla ilgileniyorum.">
-            Hello, I'm Eray. I graduated from the Department of Advanced Computer Programming and Management Information Systems. I have a strong passion for the world of software development, and I'm constantly focused on improving my skills, learning new technologies, and creating impactful solutions. I'm particularly interested in modern development processes, user-focused solutions, and efficient system design.
+        <p class="about-text" data-en="Hello, I'm Eray. I received education in Advanced Computer Programming and Management Information Systems. I have a strong passion for the world of software development, and I'm constantly focused on improving my skills, learning new technologies, and creating impactful solutions. I'm particularly interested in modern development processes, user-focused solutions, and efficient system design." data-tr="Merhaba, ben Eray. İleri Bilgisayar Programcılığı ve Yönetim Bilişim Sistemleri alanlarında eğitim aldım. Yazılım geliştirme dünyasına büyük bir tutkuyla bağlıyım ve sürekli olarak becerilerimi geliştirmeye, yeni teknolojiler öğrenmeye ve etkili çözümler üretmeye odaklanıyorum. Özellikle modern geliştirme süreçleri, kullanıcı odaklı çözümler ve verimli sistem tasarımıyla ilgileniyorum.">
+            Hello, I'm Eray. I received education in Advanced Computer Programming and Management Information Systems. I have a strong passion for the world of software development, and I'm constantly focused on improving my skills, learning new technologies, and creating impactful solutions. I'm particularly interested in modern development processes, user-focused solutions, and efficient system design.
         </p>
         <p class="about-text" data-en="My goal is to make a difference in the tech industry by developing innovative, user-centric, and sustainable software projects. Thanks to my problem-solving abilities, analytical thinking skills, and eagerness to learn, I can quickly adapt to dynamic environments. As a collaborative and proactive developer, I aim to contribute to both individual and team-oriented projects." data-tr="Amacım, yenilikçi, kullanıcı odaklı ve sürdürülebilir yazılım projeleri geliştirerek teknoloji sektöründe fark yaratmak. Problem çözme yeteneğim, analitik düşünme becerim ve öğrenmeye olan isteğim sayesinde dinamik ortamlara hızla uyum sağlayabiliyorum. İşbirlikçi ve proaktif bir geliştirici olarak hem bireysel hem de ekip odaklı projelere katkı sağlamayı hedefliyorum.">
             My goal is to make a difference in the tech industry by developing innovative, user-centric, and sustainable software projects. Thanks to my problem-solving abilities, analytical thinking skills, and eagerness to learn, I can quickly adapt to dynamic environments. As a collaborative and proactive developer, I aim to contribute to both individual and team-oriented projects.
@@ -1767,38 +1599,15 @@
         <p>&copy; 2025 Eray Yüksek. <span data-en="All rights reserved." data-tr="Tüm hakları saklıdır.">All rights reserved.</span></p>
     </footer>
 
-    <button type="button" class="cv-float-btn" onclick="openCvPreview()">
+    <!-- CV Görüntüle: doğrudan yeni sekmede PDF'i açar -->
+    <a href="files/Eray_Yuksek_CV.pdf" target="_blank" rel="noopener noreferrer" class="cv-float-btn">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 5c-5 0-8.5 4.5-9.5 7 1 2.5 4.5 7 9.5 7s8.5-4.5 9.5-7c-1-2.5-4.5-7-9.5-7z" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             <circle cx="12" cy="12" r="3" stroke="#000" stroke-width="1.8"/>
         </svg>
         <span data-en="View CV" data-tr="CV Görüntüle">View CV</span>
-    </button>
+    </a>
 
-    <div id="cvPreviewModal" class="cv-modal-overlay" onclick="closeCvPreview(event)">
-        <div class="cv-modal-content" onclick="event.stopPropagation()">
-            <div class="cv-modal-header">
-                <span>Eray Yüksek - CV</span>
-                <button type="button" class="cv-modal-close" onclick="closeCvPreview()" aria-label="Kapat">&times;</button>
-            </div>
-            <div id="cvModalLoading" class="cv-modal-loading" data-en="Loading..." data-tr="Yükleniyor...">Loading...</div>
-            <div id="cvPreviewPages" class="cv-modal-pages" style="display:none;"></div>
-            <div id="cvModalFallback" class="cv-modal-fallback">
-                <span data-en="Preview couldn't be opened in this browser." data-tr="Bu tarayıcıda önizleme açılamadı.">Preview couldn't be opened in this browser.</span>
-                <a href="files/Eray_Yuksek_CV.pdf" target="_blank" class="research-view-btn" data-en="Open in new tab" data-tr="Yeni sekmede aç">Open in new tab</a>
-            </div>
-            <div class="cv-modal-footer">
-                <a href="files/Eray_Yuksek_CV.pdf" download class="research-download-btn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 3v12m0 0 4-4m-4 4-4-4" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span data-en="Download CV" data-tr="CV İndir">Download CV</span>
-                </a>
-            </div>
-        </div>
-    </div>
-    
     <script>
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
@@ -1866,105 +1675,6 @@
             
             if (!header.contains(event.target) && navLinks.classList.contains('show')) {
                 navLinks.classList.remove('show');
-            }
-        });
-
-        // CV önizleme modalı — PDF.js ile her sayfa bir <canvas> olarak çizilir.
-        // Bu yöntem tarayıcının kendi (native) PDF eklentisine veya Google Docs
-        // Viewer gibi dış servislere bağımlı değildir; bu yüzden hem masaüstünde
-        // hem mobilde (uygulama-içi tarayıcılar dahil) aynı şekilde çalışır ve
-        // tüm sayfalar alt alta kaydırılarak görülebilir.
-        var cvPdfjsLoading = null;
-
-        function loadPdfJs() {
-            if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
-            if (cvPdfjsLoading) return cvPdfjsLoading;
-
-            cvPdfjsLoading = new Promise(function (resolve, reject) {
-                var script = document.createElement('script');
-                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.js';
-                script.onload = function () {
-                    if (window.pdfjsLib) {
-                        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-                            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.js';
-                        resolve(window.pdfjsLib);
-                    } else {
-                        reject(new Error('pdfjsLib yüklenemedi'));
-                    }
-                };
-                script.onerror = function () { reject(new Error('pdf.js indirilemedi')); };
-                document.head.appendChild(script);
-            });
-
-            return cvPdfjsLoading;
-        }
-
-        function openCvPreview() {
-            const modal = document.getElementById('cvPreviewModal');
-            const pagesContainer = document.getElementById('cvPreviewPages');
-            const loading = document.getElementById('cvModalLoading');
-            const fallback = document.getElementById('cvModalFallback');
-
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-
-            // Zaten render edilmişse tekrar yüklemeye gerek yok
-            if (pagesContainer.dataset.rendered === '1') {
-                return;
-            }
-
-            fallback.classList.remove('show');
-            pagesContainer.style.display = 'none';
-            loading.classList.add('show');
-
-            var pdfUrl = window.location.origin
-                + window.location.pathname.replace(/[^/]*$/, '')
-                + 'files/Eray_Yuksek_CV.pdf';
-
-            loadPdfJs()
-                .then(function (pdfjsLib) {
-                    return pdfjsLib.getDocument(pdfUrl).promise;
-                })
-                .then(function (pdf) {
-                    var renderNext = function (pageNum) {
-                        if (pageNum > pdf.numPages) return Promise.resolve();
-                        return pdf.getPage(pageNum).then(function (page) {
-                            var scale = Math.min(2, (window.devicePixelRatio || 1) * 1.3);
-                            var viewport = page.getViewport({ scale: scale });
-                            var canvas = document.createElement('canvas');
-                            canvas.width = viewport.width;
-                            canvas.height = viewport.height;
-                            var ctx = canvas.getContext('2d');
-                            pagesContainer.appendChild(canvas);
-                            return page.render({ canvasContext: ctx, viewport: viewport }).promise
-                                .then(function () { return renderNext(pageNum + 1); });
-                        });
-                    };
-                    return renderNext(1);
-                })
-                .then(function () {
-                    loading.classList.remove('show');
-                    pagesContainer.style.display = 'flex';
-                    pagesContainer.dataset.rendered = '1';
-                })
-                .catch(function (err) {
-                    console.error('CV önizleme hatası:', err);
-                    loading.classList.remove('show');
-                    pagesContainer.style.display = 'none';
-                    fallback.classList.add('show');
-                });
-        }
-
-        function closeCvPreview(event) {
-            const modal = document.getElementById('cvPreviewModal');
-            modal.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-
-        // Esc tuşu ile kapatma
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeCvPreview();
             }
         });
 
